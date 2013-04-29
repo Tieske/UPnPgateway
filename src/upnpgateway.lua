@@ -21,6 +21,7 @@ local socket = require("socket")
 local logger
 local upnp
 local path = require("pl.path")
+local dir = require("pl.dir")
 
 
 local exitcodes = setmetatable({
@@ -159,7 +160,27 @@ if args then
   logger:info("Setting debug level to; " .. args.debug)
   logger:setLevel(args.debug)
   logger:info("Setting configuration path to; " .. args.configpath)
+  if path.exists(args.configpath) then
+    logger:debug("configuration path already exists")
+  else
+    logger:debug("configuration path doesn't exist, creating now")
+    if not dir.makepath(args.configpath) then
+      logger:fatal("Failed to create configuration path: " .. args.configpath)
+      os.exit(exitcodes.ERROR)
+    end
+  end
   upnp.configroot = args.configpath
+  
+  logger:info("Setting webroot path to; " .. args.webroot)
+  if path.exists(args.webroot) then
+    logger:debug("webroot path already exists")
+  else
+    logger:debug("webroot path doesn't exist, creating now")
+    if not dir.makepath(args.webroot) then
+      logger:fatal("Failed to create webroot path: " .. args.webroot)
+      os.exit(exitcodes.ERROR)
+    end
+  end
   upnp.webroot = args.webroot
 
   -- Load configuration
