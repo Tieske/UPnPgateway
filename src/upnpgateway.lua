@@ -19,6 +19,8 @@ local config -- table containing configuration of gateway
 local configfile = _NAME  -- filename for configuration
 local socket = require("socket")
 local logger
+local upnp
+local path = require("pl.path")
 
 
 local exitcodes = setmetatable({
@@ -46,9 +48,9 @@ local cli = require 'cliargs'
 cli:set_name("LuaUPnP")
 cli:add_flag("--version", "prints the program's version and exits")
 cli:optarg("DRIVER", "drivers to load and start the UPnP engine with", nil ,5)
-cli:add_option("-w, --webroot=PATH", "path to web root folder, where XML description files will be written", "./web/")
+cli:add_option("-w, --webroot=PATH", "path to web root folder, where XML description files will be written", path.normpath(path.expanduser("~/UPnPgateway/web/")))
 cli:add_option("-d, --debug=INFOLEVEL", "level of output to log (DEBUG, INFO, WARN, ERROR, FATAL)", "INFO")
-cli:add_option("-c, --configpath=PATH", "path to the configuration files, where the drivers will load/store them (NOTE: must end with a path separator character)", "./config/")
+cli:add_option("-c, --configpath=PATH", "path to the configuration files, where the drivers will load/store them (NOTE: must end with a path separator character)", path.normpath(path.expanduser("~/UPnPgateway/config/")))
 
 local args = cli:parse_args()
 
