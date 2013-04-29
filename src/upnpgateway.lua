@@ -203,7 +203,7 @@ if args then
 
   -- load a single driver
   local loaddriver = function(driver)
-    local success, result = pcall(require, "upnp.drivers."..driver)
+    local success, result = pcall(require, "upnpgateway.drivers."..driver)
     if not success then
       logger:fatal("Failed loading driver '%s'; %s", driver, tostring(result))
       os.exit(exitcodes.ERROR)
