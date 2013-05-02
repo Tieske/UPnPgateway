@@ -281,14 +281,15 @@ if args then
   local copas = require("copas.timer")
   local dss = require("dss")
   local tf = function()
-    if copas.isexiting == false then
+    print("copas.isexiting", copas.isexiting)
       -- running and not scheduled to stop
       print("DSS has ",dss.queuesize," elements")
-    end
+    --end
     
   end
   
-  copas.newtimer(nil,tf, nil, true, nil):arm(5)
+  local tmr = copas.newtimer(nil,tf, nil, true, nil):arm(5)
+  print("armed timer", tmr)
   --------------------------------
   -- TEMP STUFF
   --------------------------------
