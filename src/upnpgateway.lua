@@ -275,24 +275,6 @@ if args then
     os.exit(exitcodes.ERROR)
   end
   
-  --------------------------------
-  -- TEMP STUFF
-  --------------------------------
-  local copas = require("copas.timer")
-  local dss = require("dss")
-  local tf = function()
-    if copas.isexiting() == false then
-      -- running and not scheduled to stop
-      print("DSS has ",dss.queuesize()," elements")
-    end
-  end
-  
-  local tmr = copas.newtimer(nil,tf, nil, true, nil):arm(5)
-  print("armed timer", tmr)
-  --------------------------------
-  -- TEMP STUFF
-  --------------------------------
-
   -- start the engine by starting the copas loop
   logger:info("+------------------------------------+")
   logger:info("|      Starting the main loop        |")
