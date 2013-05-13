@@ -29,9 +29,9 @@ build = {
     },
     install = {
       bin = {
-        "bin/upnpgateway.bat"
-        "bin/upnpgateway"
-        "bin/upnpgateway_bootstrap"
+        "bin/upnpgateway.bat",
+        "bin/upnpgateway",
+        "bin/upnpgateway_bootstrap",
       },
     },
     --copy_directories = { "doc", "test" },
