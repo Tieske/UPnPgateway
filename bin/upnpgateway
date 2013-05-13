@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Obtain $BOOTSTRAP_PATH
+DIR="$( dirname "$0" )"
+BOOTSTRAP_PATH="$DIR/upnpgateway_bootstrap"
+
+# Execution, 999 exitcode means a restart is requested
+while :
+do
+   lua $BOOTSTRAP_PATH $*
+   if [ "$?" -ne "999" ]
+   then
+      break
+   fi
+done
+
+exit $?

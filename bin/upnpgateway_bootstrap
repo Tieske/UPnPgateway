@@ -1,0 +1,2 @@
+-- start the application which is installed as a module
+require('upnpgateway')   -- starts "<lualibs>/upnpgateway/init.lua"
