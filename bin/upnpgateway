@@ -4,11 +4,11 @@
 DIR="$( dirname "$0" )"
 BOOTSTRAP_PATH="$DIR/upnpgateway_bootstrap"
 
-# Execution, 999 exitcode means a restart is requested
+# Execution, 255 exitcode means a restart is requested
 while :
 do
    lua $BOOTSTRAP_PATH $*
-   if [ "$?" -ne "999" ]
+   if [ "$?" -ne "255" ]
    then
       break
    fi

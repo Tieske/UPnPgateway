@@ -25,9 +25,9 @@ local dir = require("pl.dir")
 
 
 local exitcodes = setmetatable({
-  ERROR = -1,     -- exit with error code
   CLEAN = 0,      -- exit with success code
-  RESTART = 999,  -- exit requires a restart by the bootstrapper script
+  ERROR = 1,      -- exit with error code
+  RESTART = 255,  -- exit requires a restart by the bootstrapper script
 },{ __index = function(self, key)
       error(string.format("No element named '%s'", tostring(key)), 2)
     end
