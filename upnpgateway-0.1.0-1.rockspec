@@ -15,7 +15,7 @@ dependencies = {
     "lua_cliargs >= 2.1",
     "luasocket >= 2.0.2",
     "serpent >= 0.20",
-    --"penlight >= 1.0.0",
+    "penlight >= 1.0.0",
 }
 build = {
     type = "builtin",
