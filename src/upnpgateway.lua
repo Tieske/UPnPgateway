@@ -92,7 +92,7 @@ local utilityservice = {
           restartgateway()
         end,
       },
-			{ name = "SaveConfiguration",
+      { name = "SaveConfiguration",
         execute = function(self, params)
           local success, result, err
           local tspend = socket.gettime()
@@ -215,7 +215,7 @@ if args then
   local device = require("upnp.devices.urn_schemas-upnp-org_device_Basic_1")()
   device.UDN = config.UDN
   device.friendlyName = config.friendlyName
-	device.manufacturer = "Thijs Schreijer"
+  device.manufacturer = "Thijs Schreijer"
   device.manufacturerURL = "http://www.thijsschreijer.nl"
   device.modelDescription = "A generic gateway device powered by the Lua scripting language, easily customized to add your own devices"
   device.modelName = "LuaUPnP gateway"
