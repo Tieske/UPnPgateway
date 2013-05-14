@@ -1,7 +1,8 @@
 package = "upnpgateway"
 version = "0.1.0-1"
 source = {
-    url = "to be done",
+    url = "https://github.com/Tieske/UPnPgateway/archive/version_0.1.0.tar.gz",
+    dir = "UPnPgateway-version_0.1.0",
 }
 description = {
     summary = "UPnPgateway to wrap existing hard and software in UPnP devices",

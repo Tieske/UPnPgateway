@@ -52,6 +52,7 @@ cli:optarg("DRIVER", "drivers to load and start the UPnP engine with", nil ,5)
 cli:add_option("-w, --webroot=PATH", "path to web root folder, where XML description files will be written", path.normpath(path.expanduser("~/UPnPgateway/web/")))
 cli:add_option("-d, --debug=INFOLEVEL", "level of output to log (DEBUG, INFO, WARN, ERROR, FATAL)", "INFO")
 cli:add_option("-c, --configpath=PATH", "path to the configuration files, where the drivers will load/store them (NOTE: must end with a path separator character)", path.normpath(path.expanduser("~/UPnPgateway/config/")))
+cli:add_flag("-x, --clearweb", "Erases all content from the webroot path before starting")
 
 local args = cli:parse_args()
 
@@ -174,6 +175,26 @@ if args then
   logger:info("Setting webroot path to; " .. args.webroot)
   if path.exists(args.webroot) then
     logger:debug("webroot path already exists")
+    if args.clearweb then
+      -- first clear files
+      for _, f in ipairs(dir.getfiles(args.webroot) or {}) do
+        local p = path.normpath(path.join(args.webroot, f))
+        if not os.remove(p) then
+          logger:warn("Failed to remove file: %s", p)
+        else
+          logger:debug("Removed file: %s", p)
+        end
+      end
+      -- now clear subdirs
+      for _, d in ipairs(dir.getdirectories(args.webroot) or {}) do
+        local p = path.normpath(path.join(args.webroot, d))
+        if not dir.rmtree(p) then
+          logger:warn("Failed to remove directory: %s", p)
+        else
+          logger:debug("Removed directory: %s", p)
+        end
+      end
+    end
   else
     logger:debug("webroot path doesn't exist, creating now")
     if not dir.makepath(args.webroot) then
