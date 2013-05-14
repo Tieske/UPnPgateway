@@ -12,7 +12,7 @@ description = {
     homepage = "http://www.thijsschreijer.nl/"
 }
 dependencies = {
-    --"luaupnp >= 0.1",
+    "luaupnp >= 0.1",
     "lua_cliargs >= 2.1",
     "luasocket >= 2.0.2",
     "serpent >= 0.20",
