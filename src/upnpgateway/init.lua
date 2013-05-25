@@ -134,7 +134,7 @@ local utilityservice = {
 
 if args then
   if args.version then
-    local upnp = require 'upnp' 
+    upnp = require 'upnp' 
     return print("\n\n" .. upnp._VERSION .. "; " .. (upnp._DESCRIPTION or "nil"))
   end
   
@@ -152,7 +152,7 @@ if args then
   end
   
   
-  local upnp = require 'upnp' -- only load upnp here, because it redefines 'print'
+  upnp = require 'upnp' -- only load upnp here, because it redefines 'print'
   logger = upnp.logger
   logger:info("+------------------------------------+")
   logger:info("|      Loading configuration         |")
