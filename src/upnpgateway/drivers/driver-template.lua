@@ -59,6 +59,7 @@ end
 -- @return device table to be inserted into the gateway device as a sub-device
 function driver:getdevice()
   if driver.device then return driver.device end
+  logger:debug("Driver '%s': entering getdevice()",self._NAME)
   -- create a basic device for the driver
   local device = require("upnp.devices.urn_schemas-upnp-org_device_Basic_1")()
   device.friendlyName = config.friendlyName
@@ -68,6 +69,7 @@ function driver:getdevice()
   device.modelName = driver._NAME .." "..driver._VERSION
   device.UDN = config.UDN
   
+  logger:info("Driver '%s': implementing '%s' (%s)",self._NAME, device.friendlyName, device.UDN)
   
   -- Add some sub-devices to the driver device
   -- as example a standard BinaryLight device
@@ -86,6 +88,7 @@ function driver:getdevice()
   
   -- store the driver device in the driver table and return it
   driver.device = device
+  logger:debug("Driver '%s': leaving getdevice()",self._NAME)
   return device
 end
 

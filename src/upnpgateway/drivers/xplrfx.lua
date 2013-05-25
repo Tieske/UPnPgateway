@@ -95,20 +95,25 @@ if not config.UDN then config.UDN = upnp.lib.util.CreateUUID() end
 -- Will be called after loading the driver, should return a device table
 function driver:getdevice()
   if driver.device then return driver.device end
+  logger:debug("Driver '%s': entering getdevice()",self._NAME)
   -- create a basic device for the driver
   local device = require("upnp.devices.urn_schemas-upnp-org_device_Basic_1")()
   device.friendlyName = config.friendlyName
-	device.manufacturer = "manufacturer"
-  device.manufacturerURL = "http://www.manufacturer.com"
+	device.manufacturer = "Thijs Schreijer"
+  device.manufacturerURL = "http://www.thijsschreijer.nl"
   device.modelDescription = driver._DESCRIPTION
   device.modelName = driver._NAME .." "..driver._VERSION
   device.UDN = config.UDN
+    
+  logger:info("Driver '%s': implementing '%s' (%s)",self._NAME, device.friendlyName, device.UDN)
     
   -- generate all devices in the list
   for _,item in pairs(config.list) do
     -- create UUID if not set (set it here so it will be saved along with the config table)
     if not item.UDN then item.UDN = upnp.lib.util.CreateUUID() end
-
+    
+    logger:info("Driver '%s': implementing device '%s' (%s)",self._NAME, tostring(item.friendlyName), tostring(item.UDN))
+    
     -- create custom table for this device
     local ct = {
       friendlyName = item.friendlyName,
@@ -135,6 +140,7 @@ function driver:getdevice()
   
   -- all sub devices added, now return driver device (containing all subs)
   driver.device = device
+  logger:debug("Driver '%s': leaving getdevice()",self._NAME)
   return device
 end
 
